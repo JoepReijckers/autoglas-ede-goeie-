@@ -5,14 +5,15 @@
  */
 import { useState, useEffect } from "react";
 import { Phone, Menu, X } from "lucide-react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { label: "Ruitschade", href: "#ruitschade" },
-  { label: "Kalibratie", href: "#adas" },
+  { label: "Kalibratie", href: "#kalibratie" },
   { label: "Verzekering", href: "#verzekering" },
   { label: "Zakelijk", href: "#zakelijk" },
-  { label: "123 Ruit", href: "#_123ruit" },
+  { label: "123 Ruit", href: "/123-ruit" },
   { label: "Over Autoglas Ede", href: "#over-ons" },
   { label: "Contact", href: "#contact" },
 ];
@@ -20,6 +21,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -27,8 +29,14 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollTo = (href: string) => {
+  const handleNavClick = (href: string) => {
     setMobileOpen(false);
+
+    if (href.startsWith("/")) {
+      setLocation(href);
+      return;
+    }
+
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
@@ -54,7 +62,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <button
               key={link.href}
-              onClick={() => scrollTo(link.href)}
+              onClick={() => handleNavClick(link.href)}
               className="px-3 py-2 text-sm font-medium text-white/70 hover:text-white transition-colors duration-200 relative group"
             >
               {link.label}
@@ -99,7 +107,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <button
               key={link.href}
-              onClick={() => scrollTo(link.href)}
+              onClick={() => handleNavClick(link.href)}
               className="block w-full text-left px-4 py-3 text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
             >
               {link.label}
