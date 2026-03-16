@@ -9,11 +9,11 @@ import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { label: "Ruitschade", href: "#ruitschade" },
-  { label: "ADAS Kalibratie", href: "#adas" },
+  { label: "Kalibratie", href: "#adas" },
   { label: "Verzekering", href: "#verzekering" },
-  { label: "Over Ons", href: "#over-ons" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Zakelijk", href: "#zakelijk" },
+  { label: "123 Ruit", href: "#_123ruit" },
+  { label: "Over Autoglas Ede", href: "#over-ons" },
   { label: "Contact", href: "#contact" },
 ];
 
