@@ -16,7 +16,6 @@ function Router() {
       <Route path={"/123ruit"} component={OneTwoThreeRuit} />
 =======
       <Route path={"/123-ruit"} component={OneTwoThreeRuit} />
->>>>>>> c78c886f630316714de8935617efd658efd92f5a
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
