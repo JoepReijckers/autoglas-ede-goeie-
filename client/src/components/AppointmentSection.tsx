@@ -171,7 +171,7 @@ export default function AppointmentSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             id="contact"
-            className="glass-card rounded-2xl p-6 lg:p-8"
+            className="scroll-mt-24 glass-card rounded-2xl p-6 lg:p-8"
           >
             {submitted ? (
               <div className="flex flex-col items-center justify-center py-16 text-center">

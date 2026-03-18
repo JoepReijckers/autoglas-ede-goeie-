@@ -78,12 +78,29 @@ export default function MascotLoader({ isLoading = true, minDuration = 1500 }: M
 
 /* Initial page loader - used on first page load */
 export function InitialLoader() {
-  const [isLoading, setIsLoading] = useState(true);
+  const STORAGE_KEY = "autoglas-ede.initialLoaderShown";
+  const [isLoading, setIsLoading] = useState(() => {
+    try {
+      return !sessionStorage.getItem(STORAGE_KEY);
+    } catch {
+      // If storage is blocked, just fall back to showing once.
+      return true;
+    }
+  });
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1800);
+    if (!isLoading) return;
+
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      try {
+        sessionStorage.setItem(STORAGE_KEY, "1");
+      } catch {
+        // ignore
+      }
+    }, 1800);
     return () => clearTimeout(timer);
-  }, []);
+  }, [isLoading]);
 
   return <MascotLoader isLoading={isLoading} />;
 }

@@ -14,5 +14,5 @@ Plaats hier de volgende bestanden zodat ze op de 123RUIT-pagina zichtbaar zijn:
 Na het toevoegen van de bestanden zouden de foto's direct zichtbaar moeten zijn (eventueel na een refresh).
 ![alt text](123ruit-workshop-3-1.jpg)
 ![alt text](123ruit-network-2.jpg)
-![alt text](123ruit-logo-black.png)
 ![alt text](123ruit-hero-1.jpg)
+![alt text](123ruit-logo-black.png)

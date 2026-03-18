@@ -16,7 +16,7 @@ const stats = [
 
 export default function AboutSection() {
   return (
-    <section id="over-ons" className="py-20 lg:py-28 relative">
+    <section id="over-ons" className="scroll-mt-24 py-20 lg:py-28 relative">
       <div className="section-divider mb-20" />
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">

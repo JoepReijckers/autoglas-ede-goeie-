@@ -10,7 +10,7 @@ const ADAS_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663438639607/fhLmW
 
 export default function AdasSection() {
   return (
-    <section id="adas" className="py-20 lg:py-28 relative">
+    <section id="adas" className="scroll-mt-24 py-20 lg:py-28 relative">
       <div className="section-divider mb-20" />
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -62,7 +62,7 @@ export default function AdasSection() {
               transition={{ delay: 0.3 }}
             >
               <Button
-                onClick={() => document.querySelector("#afspraak")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
                 className="bg-primary text-primary-foreground hover:bg-primary/90 glow-green-sm font-semibold px-6"
               >
                 Plan kalibratie

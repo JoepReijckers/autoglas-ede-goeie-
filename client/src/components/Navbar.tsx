@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { Phone, Menu, X } from "lucide-react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
+import { useRef } from "react";
 
 const navLinks: { label: string; href: string; isPage?: boolean }[] = [
   { label: "Ruitschade", href: "#ruitschade" },
@@ -21,7 +22,8 @@ const navLinks: { label: string; href: string; isPage?: boolean }[] = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [, setLocation] = useLocation();
+  const [location, setLocation] = useLocation();
+  const pendingHashRef = useRef<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -32,14 +34,82 @@ export default function Navbar() {
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
 
-    if (href.startsWith("/")) {
-      setLocation(href);
+    // Hash navigation: go to homepage and then scroll to the section.
+    if (href.startsWith("#")) {
+      pendingHashRef.current = href;
+      if (window.location.pathname !== "/") {
+        setLocation("/");
+      } else {
+        // Already on homepage; scroll now (with retries below).
+        const hash = href;
+        pendingHashRef.current = null;
+
+        let attempts = 0;
+        const maxAttempts = 18;
+        const step = () => {
+          if (window.location.pathname !== "/") return;
+          const el = document.querySelector(hash);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+            return;
+          }
+          attempts += 1;
+          if (attempts < maxAttempts) setTimeout(step, 50);
+        };
+        step();
+      }
       return;
     }
 
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    pendingHashRef.current = null;
+    setLocation(href);
   };
+
+  useEffect(() => {
+    if (pendingHashRef.current && window.location.pathname === "/") {
+      const hash = pendingHashRef.current;
+      pendingHashRef.current = null;
+
+      let attempts = 0;
+      const maxAttempts = 18;
+      const step = () => {
+        if (window.location.pathname !== "/") return;
+        const el = document.querySelector(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+        attempts += 1;
+        if (attempts < maxAttempts) setTimeout(step, 50);
+      };
+      step();
+    }
+    // If the user navigates via a plain URL like "/#contact",
+    // ensure we still retry-scrolld when the homepage DOM is ready.
+    if (
+      window.location.pathname === "/" &&
+      window.location.hash?.startsWith("#") &&
+      !pendingHashRef.current
+    ) {
+      pendingHashRef.current = window.location.hash;
+
+      let attempts = 0;
+      const maxAttempts = 18;
+      const step = () => {
+        if (window.location.pathname !== "/") return;
+        const el = document.querySelector(window.location.hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+        attempts += 1;
+        if (attempts < maxAttempts) setTimeout(step, 50);
+      };
+      step();
+      pendingHashRef.current = null;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
 
   return (
     <nav
@@ -81,7 +151,7 @@ export default function Navbar() {
             <span>0318 63 00 39</span>
           </a>
           <Button
-            onClick={() => handleNavClick("#afspraak")}
+            onClick={() => handleNavClick("#contact")}
             className="bg-primary text-primary-foreground hover:bg-primary/90 glow-green-sm font-semibold px-5"
           >
             Afspraak Maken
@@ -104,15 +174,17 @@ export default function Navbar() {
         }`}
       >
         <div className="bg-[oklch(0.13_0.005_260/95%)] backdrop-blur-xl border-t border-white/5 px-4 py-4 space-y-1">
-          {navLinks.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => handleNavClick(link.href)}
-              className="block w-full text-left px-4 py-3 text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-            >
-              {link.label}
-            </button>
-          ))}
+          {navLinks.map((link) =>
+            (
+              <button
+                key={link.href}
+                onClick={() => handleNavClick(link.href)}
+                className="block w-full text-left px-4 py-3 text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+              >
+                {link.label}
+              </button>
+            )
+          )}
           <div className="pt-3 border-t border-white/5 space-y-3">
             <a
               href="tel:0318630039"
@@ -122,7 +194,7 @@ export default function Navbar() {
               0318 63 00 39
             </a>
             <Button
-              onClick={() => handleNavClick("#afspraak")}
+              onClick={() => handleNavClick("#contact")}
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90 glow-green-sm font-semibold"
             >
               Afspraak Maken

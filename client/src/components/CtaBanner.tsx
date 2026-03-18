@@ -31,7 +31,7 @@ export default function CtaBanner() {
           <div className="flex flex-wrap gap-3 shrink-0">
             <Button
               size="lg"
-              onClick={() => document.querySelector("#afspraak")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
               className="bg-primary text-primary-foreground hover:bg-primary/90 glow-green font-semibold text-base px-7 h-12"
             >
               <Calendar className="w-5 h-5 mr-2" />

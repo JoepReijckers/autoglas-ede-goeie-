@@ -47,7 +47,7 @@ const cardVariants = {
 
 export default function ServicesSection() {
   return (
-    <section id="ruitschade" className="py-20 lg:py-28 relative">
+    <section id="ruitschade" className="scroll-mt-24 py-20 lg:py-28 relative">
       <div className="container">
         {/* Section header */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-16">

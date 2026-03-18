@@ -23,7 +23,7 @@ const infoLinks = [
   { label: "Reviews", href: "#reviews" },
   { label: "Veelgestelde vragen", href: "#faq" },
   { label: "Contact", href: "#contact" },
-  { label: "Afspraak maken", href: "#afspraak" },
+  { label: "Afspraak maken", href: "#contact" },
 ];
 
 export default function Footer() {

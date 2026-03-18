@@ -70,7 +70,7 @@ export default function HeroSection() {
             >
               <Button
                 size="lg"
-                onClick={() => document.querySelector("#afspraak")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
                 className="bg-primary text-primary-foreground hover:bg-primary/90 glow-blue font-semibold text-base px-7 h-12"
               >
                 <Calendar className="w-5 h-5 mr-2" />
