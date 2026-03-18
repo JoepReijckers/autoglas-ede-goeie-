@@ -10,14 +10,10 @@ import { Button } from "@/components/ui/button";
 
 const navLinks: { label: string; href: string; isPage?: boolean }[] = [
   { label: "Ruitschade", href: "#ruitschade" },
-  { label: "Kalibratie", href: "#kalibratie" },
+  { label: "Kalibratie", href: "#adas" },
   { label: "Verzekering", href: "#verzekering" },
   { label: "Zakelijk", href: "#zakelijk" },
-<<<<<<< HEAD
   { label: "123 Ruit", href: "/123ruit", isPage: true },
-=======
-  { label: "123 Ruit", href: "/123-ruit" },
->>>>>>> c78c886f630316714de8935617efd658efd92f5a
   { label: "Over Autoglas Ede", href: "#over-ons" },
   { label: "Contact", href: "#contact" },
 ];
@@ -63,29 +59,6 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-1">
-<<<<<<< HEAD
-          {navLinks.map((link) =>
-            link.isPage ? (
-              <a
-                key={link.href}
-                href={link.href}
-                className="px-3 py-2 text-sm font-medium text-white/70 hover:text-white transition-colors duration-200 relative group"
-              >
-                {link.label}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full rounded-full" />
-              </a>
-            ) : (
-              <button
-                key={link.href}
-                onClick={() => scrollTo(link.href)}
-                className="px-3 py-2 text-sm font-medium text-white/70 hover:text-white transition-colors duration-200 relative group"
-              >
-                {link.label}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full rounded-full" />
-              </button>
-            )
-          )}
-=======
           {navLinks.map((link) => (
             <button
               key={link.href}
@@ -96,7 +69,6 @@ export default function Navbar() {
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full rounded-full" />
             </button>
           ))}
->>>>>>> c78c886f630316714de8935617efd658efd92f5a
         </div>
 
         {/* Desktop CTA */}
@@ -109,7 +81,7 @@ export default function Navbar() {
             <span>0318 63 00 39</span>
           </a>
           <Button
-            onClick={() => scrollTo("#afspraak")}
+            onClick={() => handleNavClick("#afspraak")}
             className="bg-primary text-primary-foreground hover:bg-primary/90 glow-green-sm font-semibold px-5"
           >
             Afspraak Maken
@@ -132,27 +104,6 @@ export default function Navbar() {
         }`}
       >
         <div className="bg-[oklch(0.13_0.005_260/95%)] backdrop-blur-xl border-t border-white/5 px-4 py-4 space-y-1">
-<<<<<<< HEAD
-          {navLinks.map((link) =>
-            link.isPage ? (
-              <a
-                key={link.href}
-                href={link.href}
-                className="block w-full text-left px-4 py-3 text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-              >
-                {link.label}
-              </a>
-            ) : (
-              <button
-                key={link.href}
-                onClick={() => scrollTo(link.href)}
-                className="block w-full text-left px-4 py-3 text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-              >
-                {link.label}
-              </button>
-            )
-          )}
-=======
           {navLinks.map((link) => (
             <button
               key={link.href}
@@ -162,7 +113,6 @@ export default function Navbar() {
               {link.label}
             </button>
           ))}
->>>>>>> c78c886f630316714de8935617efd658efd92f5a
           <div className="pt-3 border-t border-white/5 space-y-3">
             <a
               href="tel:0318630039"
@@ -172,7 +122,7 @@ export default function Navbar() {
               0318 63 00 39
             </a>
             <Button
-              onClick={() => scrollTo("#afspraak")}
+              onClick={() => handleNavClick("#afspraak")}
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90 glow-green-sm font-semibold"
             >
               Afspraak Maken
